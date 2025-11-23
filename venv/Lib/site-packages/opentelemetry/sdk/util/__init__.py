@@ -14,18 +14,16 @@
 
 import datetime
 import threading
-from collections import deque
+from collections import OrderedDict, deque
 from collections.abc import MutableMapping, Sequence
 from typing import Optional
 
-from typing_extensions import deprecated
+from deprecated import deprecated
 
 
 def ns_to_iso_str(nanoseconds):
     """Get an ISO 8601 string from time_ns value."""
-    ts = datetime.datetime.fromtimestamp(
-        nanoseconds / 1e9, tz=datetime.timezone.utc
-    )
+    ts = datetime.datetime.utcfromtimestamp(nanoseconds / 1e9)
     return ts.strftime("%Y-%m-%dT%H:%M:%S.%fZ")
 
 
@@ -34,9 +32,9 @@ def get_dict_as_key(labels):
     return tuple(
         sorted(
             map(
-                lambda kv: (
-                    (kv[0], tuple(kv[1])) if isinstance(kv[1], list) else kv
-                ),
+                lambda kv: (kv[0], tuple(kv[1]))
+                if isinstance(kv[1], list)
+                else kv,
                 labels.items(),
             )
         )
@@ -93,7 +91,7 @@ class BoundedList(Sequence):
         return bounded_list
 
 
-@deprecated("Deprecated since version 1.4.0.")
+@deprecated(version="1.4.0")  # type: ignore
 class BoundedDict(MutableMapping):
     """An ordered dict with a fixed max capacity.
 
@@ -109,7 +107,7 @@ class BoundedDict(MutableMapping):
                 raise ValueError
         self.maxlen = maxlen
         self.dropped = 0
-        self._dict = {}  # type: dict
+        self._dict = OrderedDict()  # type: OrderedDict
         self._lock = threading.Lock()  # type: threading.Lock
 
     def __repr__(self):
@@ -145,7 +143,7 @@ class BoundedDict(MutableMapping):
 
     @classmethod
     def from_map(cls, maxlen, mapping):
-        mapping = dict(mapping)
+        mapping = OrderedDict(mapping)
         bounded_dict = cls(maxlen)
         for key, value in mapping.items():
             bounded_dict[key] = value
