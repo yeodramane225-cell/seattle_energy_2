@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.pkl
+*.joblib
+
+# Environnements virtuels
+venv/
+env/
+.env
+
+# Fichiers de log
+*.log
+
+# Données volumineuses / sensibles
+data_ml/
+*.csv
+*.xlsx
+*.h5
+*.npz
+
+# BentoML spécifiques
+*.bento/
+*.db
+
+# IDE / éditeur
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Docker
+*.dockerignore
