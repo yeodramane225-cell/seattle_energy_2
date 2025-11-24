@@ -9,13 +9,12 @@ pipeline = joblib.load("pipeline_building_energy.pkl")  # remplace par ton fichi
 if not isinstance(pipeline, Pipeline):
     raise TypeError("L'objet pipeline n'est pas un sklearn.pipeline.Pipeline")
 
-# Sauvegarder le pipeline dans BentoML avec le nom attendu par le service Docker
+# Sauvegarder le pipeline dans BentoML
 model_ref = bentoml.sklearn.save_model(
-    name="energy_predictor",  # renommé ici
+    name="building_energy_model",
     model=pipeline,
     signatures={"predict": {"batchable": True}}
 )
 
 print(f"Modèle sauvegardé : {model_ref}")
 print("Chemin du modèle :", model_ref.path)
-

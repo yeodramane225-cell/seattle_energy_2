@@ -1,0 +1,9 @@
+service: "service:svc"
+include:
+  - "*.py"  # inclut ton script service.py
+  - "venv/**" # facultatif si tu veux inclure les dépendances locales
+python:
+  packages:
+    - scikit-learn
+    - pandas
+    - numpy
