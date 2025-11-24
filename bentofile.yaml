@@ -1,9 +1,33 @@
-service: "service:svc"
+service: "service:svc"  # ton service BentoML défini dans service.py
+
+# Fichiers à inclure dans l'image Docker
 include:
-  - "*.py"  # inclut ton script service.py
-  - "venv/**" # facultatif si tu veux inclure les dépendances locales
+  - "*.py"          # scripts Python (service.py + autres modules)
+  - "models/**"     # tous les modèles ML sauvegardés (ex: .pkl)
+  - "bento_files/**" # si tu as d’autres fichiers nécessaires
+  - "requirements.txt" # optionnel, si tu veux inclure un fichier requirements pour références
+
+# Dépendances Python nécessaires pour le modèle et le service
 python:
   packages:
     - scikit-learn
     - pandas
     - numpy
+    - bentoml
+    - pydantic
+    - fastapi  # si ton service utilise FastAPI via BentoML
+    - uvicorn  # serveur ASGI
+
+# Optionnel : configuration de l'image Docker
+docker:
+  python_version: "3.10"
+  image_name: "building_energy_predictor"
+  image_tag: "latest"
+
+# Timeout global pour le service BentoML
+bento_server:
+  timeout: 300  # secondes
+
+# Instructions pour inclure d’autres fichiers statiques (si nécessaire)
+# static_content:
+#   - "static/**"
