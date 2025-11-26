@@ -70,7 +70,7 @@ def predict(data: BuildingList):
         # Convertir la liste d'objets validés en DataFrame
         df = pd.DataFrame([b.dict() for b in data.buildings])
 
-        # ⚡ Renommer la colonne pour correspondre au modèle entraîné
+        # Renommer la colonne pour correspondre au modèle entraîné
         if "PropertyGFABuildings" in df.columns:
             df.rename(columns={"PropertyGFABuildings": "PropertyGFABuilding(s)"}, inplace=True)
 
@@ -79,3 +79,4 @@ def predict(data: BuildingList):
         return {"prediction": preds.tolist()}
     except Exception as e:
         return {"error": f"Internal Server Error: {str(e)}"}
+

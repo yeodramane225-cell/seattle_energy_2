@@ -1,0 +1,20 @@
+name: building_energy_model
+version: ns467jgk3oor2dew
+module: bentoml.sklearn
+labels: {}
+options: {}
+metadata: {}
+context:
+  framework_name: sklearn
+  framework_versions:
+    scikit-learn: 1.7.2
+  bentoml_version: 1.4.29
+  python_version: 3.11.2
+signatures:
+  predict:
+    batchable: true
+    batch_dim:
+    - 0
+    - 0
+api_version: v1
+creation_time: '2025-11-26T15:20:21.926877+00:00'
