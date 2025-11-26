@@ -35,3 +35,4 @@ data_ml/
 # Docker
 *.dockerignore
 .terraform/
+bfg.jar
