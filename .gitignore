@@ -34,7 +34,13 @@ data_ml/
 
 # Docker
 *.dockerignore
+
+# Terraform
 .terraform/
-bfg.jar
-.terraform/
+
+# Fichiers sensibles
 MyNewKeyPair.pem
+
+# Autres fichiers à ignorer
+bfg.jar
+
