@@ -37,3 +37,4 @@ data_ml/
 .terraform/
 bfg.jar
 .terraform/
+MyNewKeyPair.pem
